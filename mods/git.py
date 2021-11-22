@@ -106,7 +106,7 @@ class GitModule(PatchewModule):
         r.save()
 
     def on_tags_update(self, event, series, **params):
-        if series.is_complete:
+        if False and series.is_complete:
             self.mark_as_pending_apply(series, {
                 'git.push_options': 'ci.skip',
                 })
