@@ -976,6 +976,10 @@ class ApplyCommand(SubCommand):
         if not toapply:
             print("No series need apply")
             return 3
+        ## TODO: add: toapply.get("git.no_tag_update")
+        if 'ci.skip' in str(toapply.get('git.push_options')):
+            print("*NOT* updating tag", toapply["message-id"])
+            return 0
         logf = tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8")
         push_repo = toapply.get("git.push_to")
         public_repo = toapply.get("git.public_repo")
