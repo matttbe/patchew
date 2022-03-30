@@ -385,13 +385,14 @@ class ProjectCommand(SubCommand):
             # TODO: relax this 100 limit, which probably need an API change.
             # using -100 would count all commits, while "^HEAD~100" counts merge
             # commits as one
-            new_commits = (
-                subprocess.check_output(
-                    ["git", "rev-list", commit_range, "^%s~100" % new_head], cwd=clone
-                )
-                .decode()
-                .splitlines()
-            )
+            #new_commits = (
+            #    subprocess.check_output(
+            #        ["git", "rev-list", commit_range, "^%s~100" % new_head], cwd=clone
+            #    )
+            #    .decode()
+            #    .splitlines()
+            #)
+            new_commits = [new_head]
         except:
             new_commits = [new_head]
         logging.debug("old head: %s", old_head)
