@@ -27,6 +27,7 @@ SUPERSEDES_PREFIX = "Supersedes:"
 _default_config = """
 [default]
 tags = Tested-by, Reported-by, Acked-by, Suggested-by
+update_series_on_tags = true
 
 """
 
@@ -131,7 +132,12 @@ series cover letter, patch mail body and their replies.
             series.set_property("reviewers", list(reviewers))
             if need_event:
                 emit_event("SeriesReviewed", series=series)
-        if updated:
+
+        update_series_on_tags = self.get_config("default", "update_series_on_tags",
+                                                default="true")
+        update_series_on_tags = update_series_on_tags.lower() not in \
+                                ('n', 'no', 'f', 'false', 'off', '0')
+        if update_series_on_tags and updated:
             emit_event("TagsUpdate", series=series)
 
         if not series.topic.latest or newer_than(series, series.topic.latest):
