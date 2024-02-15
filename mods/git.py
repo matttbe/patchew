@@ -87,11 +87,6 @@ class GitModule(PatchewModule):
                 desc="Publicly visible URL template for applied branch, where %t will be replaced by the applied tag name",
                 required=True,
             ),
-            schema.BooleanSchema(
-                "update_series_on_tags",
-                "Update series on new tags",
-                desc="Whether series are pushed (overriden) when new tags are sent on the mailing list",
-            ),
         ],
     )
 
