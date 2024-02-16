@@ -1109,7 +1109,7 @@ class ApplyCommand(SubCommand):
             )
             patchf = self._apply(wd, toapply, branch, force_branch, tag, logf)
             maintainers = self._get_maintainers(wd, patchf.name)
-            if push_repo:
+            if push_repo and not push_options:
                 self._push(wd, push_repo, tag, logf, push_options)
         except Exception as e:
             if not isinstance(e, ApplyFailedException):
